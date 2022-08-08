@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- SEO Stuff -->
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <meta name="googlebot" content="index, folow" />
+
+    <!-- Open Graph Tags -->
+    <!--
+    <meta property="og:title" content="" />
+    <meta property="og:description" content=""/>
+    <meta property="og:image" content="" />
+    -->
+    <style>
+      .color-white{
+        color: white !important;
+      }
+      #root{
+        padding: 20px;
+      }
+    </style>
+
+    <!-- Font Awesome CDN -->
+    <!--link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" /-->
+    {% include "default_style.html" %}
+  </head>
+  <body>
+    {% include "header.html" %}
+    <div id="root" >
+      <div id="recents" >
+        <h3>
+          Recents
+        </h3>
+        <ul type="none" >
+          {% for recent in recents %}
+            <li>
+              <a href="/view/{{ recent.uuid }}" >
+                {{ recent.code | truncate(40) }}
+              </a>
+              &nbsp;&nbsp;
+              <time>
+                {{ recent.timestamp | elapsedtime }}
+              </time>
+              ago
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+      <p>
+        <a href="/code/new" class="btn btn-primary color-white" >
+          Create
+        </a>
+      </p>
+    </div>
+    {% include "footer.html" %}
+    <script></script>
+  </body>
+</html>

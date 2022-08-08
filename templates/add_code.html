@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- SEO Stuff -->
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <meta name="googlebot" content="index, folow" />
+
+    <!-- Open Graph Tags -->
+    <!--
+    <meta property="og:title" content="" />
+    <meta property="og:description" content=""/>
+    <meta property="og:image" content="" />
+    -->    
+    
+    {% include "default_style.html" %}
+    
+    <style>
+      #root{
+        padding: 2rem;
+      }
+      
+      .file-box {
+        width: 100%;
+        height: 80vw;
+        border: 2px solid #ddd;
+        border-radius: 10px;
+        display: grid;
+        place-content: center;
+      }
+      .file-box:hover{
+        border: 4px solid rgba(0, 122, 255, 0.4);
+      }
+      
+      #code{
+        height: 80vw;
+      }
+      
+      #note {
+        height: 150px;
+      }
+      
+      .simple-text {
+        padding: 8px 5px;
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    
+    {% include "header.html" %}
+    <br/>
+    
+    <div id="root" >
+      <form method="POST" action="/code/new" enctype="multipart/form-data" >
+        
+        <div  class="form-group" >
+          <label for="note">Note</label>
+          <textarea
+            id="note"
+            name="note"
+            type="text"
+            class="form-control"
+            maxlength="256"
+            placeholder="Add a note..."
+            aria-describedby="noteHelp" ></textarea>
+          <small
+            id="noteHelp"
+            class="form-text text-muted" >
+              Optional (Supports Markdown)
+          </small>
+        </div>
+        
+        <br/>
+        <div class="form-group" >
+          <label>Code</label>
+          
+          <textarea
+            id="code"
+            name="code"
+            class="form-control language-js"
+            maxlength="5120"
+            placeholder="Paste your code here..." ></textarea>
+          <small class="form-text text-muted" >
+            Paste your code
+          </small>
+          <br/>
+          <select name="lang" class="form-control" >
+            <option value="html">HTML</option>
+            <option value="css">CSS</option>
+            <option value="js">Javascript</option>
+            <option value="py">Python</option>
+            <option value="php">PHP</option>
+            <option value="java">Java</option>
+            <option value="cpp">C++</option>
+            <option value="c">C</option>
+            <option value="shell">Shell</option>
+            <option value="rust">Rust</option>
+            <option value="plaintext">Text</option>
+          </select>
+          <small class="form-text text-muted" >
+            Select your language
+          </small>
+        </div>
+          
+        <br/>
+        <div class="form-group" >
+          <span class="simple-text" >Or you can also upload a file instead</span>
+          <label
+            for="file"
+            class="file-box text-muted" >
+            Drop or select a file
+          </label>
+          <small class="form-text text-muted" >
+            Select a file
+          </small>
+          
+          <input
+            hidden
+            id="file"
+            name="file"
+            type="file"
+            accept="*/*"
+            placeholder="Or drop a file here" />
+        </div>
+        
+        <button type="submit" class="btn btn-primary" >Add</button>
+      </form>
+    </div>
+    
+    {% include "footer.html" %}
+    
+    <script>
+      const form = document.querySelector("form"),
+        codeFileInput = document.querySelector("input#file"),
+        codeInput = document.querySelector("#code")
+        
+      
+      codeInput.addEventListener("input", e => {
+        
+      })
+      
+      codeFileInput.addEventListener("change", e => {
+        document.querySelector(".file-box").innerHTML = e.target.files[0].name
+      })
+      
+      form.addEventListener("submit", e => {
+        e.preventDefault()
+        
+        let code = false
+
+
+        if(codeInput.value != "") code = true
+        if(codeFileInput.files[0]) code = true
+        
+        if(code) form.submit()
+      })
+    </script>
+  </body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- SEO Stuff -->
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <meta name="googlebot" content="index, folow" />
+
+    <!-- Open Graph Tags -->
+    <!--
+    <meta property="og:title" content="" />
+    <meta property="og:description" content=""/>
+    <meta property="og:image" content="" />
+    -->
+
+    {% include "default_style.html" %}
+
+    <!-- Font Awesome CDN -->
+    <!--link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" /-->
+
+    <link rel="icon" type="image/png" href="icon.png" />
+  </head>
+  <body>
+    
+    <ul type="none" >
+      {% for code in codes %}
+        <li>
+          <a href="/view/{{ code.uuid }}" >{{ code.uuid }}</a>
+        </li>
+      {% endfor %}
+    </ul>
+    <script src="script.js" ></script>
+  </body>
+</html>

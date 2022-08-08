@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- SEO Stuff -->
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <meta name="googlebot" content="index, folow" />
+
+    <!-- Open Graph Tags -->
+    <!--
+    <meta property="og:title" content="" />
+    <meta property="og:description" content=""/>
+    <meta property="og:image" content="" />
+    -->
+
+    {% include "default_style.html" %}
+    
+    <link type="text/css" rel="stylesheet" href="/static/prism.css" />
+    
+    <style>
+      .code-cnt {
+        max-width: 100%;
+      }
+      #root{
+        padding: 20px;
+      }
+      pre{
+        height: auto;
+        max-height: 75vh;
+        overflow: auto;
+        word-break: normal !important;
+        word-wrap: normal !important;
+        white-space: pre !important;
+      }
+      #noteCnt {
+        background: #eee;
+        padding: 1rem;
+      }
+    </style>
+    
+  </head>
+  <body>
+    {% include "header.html" %}
+    <div id="root" >
+      {% if code.note %}
+      <p>
+        <strong>
+          User have left some note
+        </strong>
+      </p>
+      <div id="noteCnt" >
+      </div>
+      <br/><br/>
+      {% endif %}
+      <p>
+        <strong>
+          Code
+        </strong>
+      </p>
+      <div class="code-cnt" >
+        <pre><code class="language-{{ code.lang }}" >{{ code.code | e }}</code></pre>
+      </div>
+    </div>
+    {% include "footer.html" %}
+    
+    <script type="text/javascript" src="/static/prism.js" ></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script>
+      let md = marked.parse(`{{code.note}}`)
+        
+      let regex1 = /(<)(script|style|link)(>)/g,
+        regex2 = /(&lt;.*)(\w+=\"\w+\")/g
+      
+      md = md.replace(regex1, "&lt;" + "$2" + "&gt;")
+             .replace(regex2, "")
+        
+      document.querySelector("#noteCnt").innerHTML = md
+    </script>
+  </body>
+</html>

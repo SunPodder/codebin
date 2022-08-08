@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- SEO Stuff -->
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <meta name="googlebot" content="index, follow" />
+
+    <!-- Open Graph Tags -->
+    <!--
+    <meta property="og:title" content="" />
+    <meta property="og:description" content=""/>
+    <meta property="og:image" content="" />
+    -->
+    
+    {% include "default_style.html" %}
+
+     <style>
+       *{
+         text-align: center;
+       }
+       #root {
+         display: grid;
+         place-content: center;
+         place-items: center;
+         padding: 20px;
+       }
+       h1{
+         font-size: 8rem;
+       }
+     </style>
+    <link rel="icon" type="image/png" href="icon.png" />
+  </head>
+  <body>
+    {% include "header.html" %}
+    <div id="root" >
+    <h1>
+      404
+    </h1>
+    <p>
+      <div>
+        Your requested resource could not be found on the server.
+      </div>
+      <div>
+        The link maybe broken or the resource may have been deleted.
+      </div>
+    </p>
+    <p>
+    <a href="/" >
+      Take me home
+    </a>
+    </p>
+    </div>
+    {% include "footer.html" %}
+  </body>
+</html>
